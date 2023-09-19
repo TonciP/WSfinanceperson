@@ -19,16 +19,18 @@ namespace WSfinanceperson.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddApplication();
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            //services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
 
             services.AddDbContext<ReadDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("ReservaConnectionString"));
+                options.UseSqlServer(configuration.GetConnectionString("FinancePersonDbConnectionString"));
             });
             services.AddDbContext<WriteDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("ReservaConnectionString"));
+                options.UseSqlServer(configuration.GetConnectionString("FinancePersonDbConnectionString"));
             });
             //Scoped: se crea una instancia por cada request
             //Transient: se crea una instancia por cada uso
