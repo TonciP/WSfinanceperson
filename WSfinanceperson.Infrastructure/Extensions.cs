@@ -12,6 +12,7 @@ using WSfinanceperson.Infrastructure.EF;
 using Microsoft.EntityFrameworkCore;
 using Reserva.Aplication.Utils;
 using MediatR;
+using WSfinanceperson.Infrastructure.EF.Repository;
 
 namespace WSfinanceperson.Infrastructure
 {
@@ -35,8 +36,8 @@ namespace WSfinanceperson.Infrastructure
             //Scoped: se crea una instancia por cada request
             //Transient: se crea una instancia por cada uso
             //Singleton: se crea una instancia por cada aplicación
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICuentaRepository, CuentaRepository>();
             //services.AddScoped<ITrackingRepository, TrackingRepository>();
             ////services.AddScoped<IHabitacionRepository, HabitacionRepository>();
             //services.AddScoped<ITipoHabitacionRepository, TipoHabitacionRepository>();

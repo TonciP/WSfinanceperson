@@ -7,10 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EF\Config\WriteConfig\" />
     <Folder Include="EF\Config\ReadConfig\" />
     <Folder Include="EF\Repository\" />
-    <Folder Include="EF\ReadModel\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Services\" />
+    <Folder Include="Security\" />
     <Folder Include="UseCases\Query\" />
   </ItemGroup>
 

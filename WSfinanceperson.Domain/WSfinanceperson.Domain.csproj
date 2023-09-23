@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
-    <Folder Include="Factories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="NurRestaurantSharedKernel" Version="1.0.5" />
   </ItemGroup>
 

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WSfinanceperson.Domain.Models.Movimiento
+namespace WSfinanceperson.Domain.Models.Transaccion
 {
-    internal class Movimiento
+    public enum Movimiento
     {
+        Ingreso,
+        Egreso
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WSfinanceperson.Domain.Factories;
 
 namespace Reserva.Aplication.Utils
 {
@@ -15,7 +16,7 @@ namespace Reserva.Aplication.Utils
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            //services.AddScoped<IClienteFactory, ClienteFactory>();
+            services.AddScoped<ICuentaFactory, CuentaFactory>();
             //services.AddScoped<IReservaFactory, ReservaFactory>();
             //services.AddScoped<ITipoHabitacionFactory, TipoHabitacionFactory>();
 

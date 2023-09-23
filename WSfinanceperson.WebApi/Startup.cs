@@ -36,13 +36,13 @@ namespace Inventario.WebApi
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = "https://localhost:7268/",
                         ValidAudience = "https://localhost:7268/",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("WSFINANCE")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("WSFINANCE3T3N6PSJKWM")),
                         ClockSkew = TimeSpan.FromMinutes(5)
                     };
                 });
