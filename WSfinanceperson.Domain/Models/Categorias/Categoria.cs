@@ -5,18 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WSfinanceperson.Domain.Models.Transaccion
+namespace WSfinanceperson.Domain.Models.Categorias
 {
-    public class Categoria: Entity<Guid>
+    public class Categoria : AggregateRoot<Guid>
     {
+        public Guid Id { get; private set; }
         public Guid CuentaId { get; private set; }
         public string Nombre { get; private set; }
 
-        public Categoria(Guid cuentaId, string nombre) 
+        public Categoria(Guid cuentaId, string nombre)
         {
             Id = Guid.NewGuid();
-            this.CuentaId = cuentaId;
-            this.Nombre = nombre;
+            CuentaId = cuentaId;
+            Nombre = nombre;
         }
 
     }

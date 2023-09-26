@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Command\Categorias\CrearCategoria\" />
     <Folder Include="UseCases\Command\Transacciones\" />
     <Folder Include="UseCases\DomainEventHandler\" />
   </ItemGroup>

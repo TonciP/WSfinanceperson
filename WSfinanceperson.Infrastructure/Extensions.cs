@@ -38,6 +38,7 @@ namespace WSfinanceperson.Infrastructure
             //Singleton: se crea una instancia por cada aplicación
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICuentaRepository, CuentaRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             //services.AddScoped<ITrackingRepository, TrackingRepository>();
             ////services.AddScoped<IHabitacionRepository, HabitacionRepository>();
             //services.AddScoped<ITipoHabitacionRepository, TipoHabitacionRepository>();

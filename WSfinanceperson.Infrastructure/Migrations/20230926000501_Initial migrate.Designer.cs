@@ -12,8 +12,8 @@ using WSfinanceperson.Infrastructure.EF.Contexts;
 namespace WSfinanceperson.Infrastructure.Migrations
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20230921184229_InitialMigrate")]
-    partial class InitialMigrate
+    [Migration("20230926000501_Initial migrate")]
+    partial class Initialmigrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,27 @@ namespace WSfinanceperson.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("WSfinanceperson.Domain.Models.Categorias.Categoria", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CuentaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CuentaId");
+
+                    b.ToTable("Categorias", (string)null);
+                });
 
             modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
                 {
@@ -71,25 +92,13 @@ namespace WSfinanceperson.Infrastructure.Migrations
                     b.ToTable("Persona", (string)null);
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transaccion.Categoria", b =>
+            modelBuilder.Entity("WSfinanceperson.Domain.Models.Categorias.Categoria", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CuentaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CuentaId");
-
-                    b.ToTable("Categorias", (string)null);
+                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", null)
+                        .WithMany("_categoria")
+                        .HasForeignKey("CuentaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
@@ -101,15 +110,6 @@ namespace WSfinanceperson.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Persona");
-                });
-
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transaccion.Categoria", b =>
-                {
-                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", null)
-                        .WithMany("_categoria")
-                        .HasForeignKey("CuentaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>

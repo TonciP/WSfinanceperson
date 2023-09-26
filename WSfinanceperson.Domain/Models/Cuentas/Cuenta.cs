@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Personas;
-using WSfinanceperson.Domain.Models.Transaccion;
 
 namespace WSfinanceperson.Domain.Models.Cuentas
 {

@@ -7,9 +7,9 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Personas;
-using WSfinanceperson.Domain.Models.Transaccion;
 using WSfinanceperson.Infrastructure.EF.Config.WriteConfig;
 
 namespace WSfinanceperson.Infrastructure.EF.Contexts
@@ -18,7 +18,9 @@ namespace WSfinanceperson.Infrastructure.EF.Contexts
         : DbContext
     {
         public virtual DbSet<Persona> Persona { set; get; }
+        public virtual DbSet<Categoria> Categoria { set; get; }
         public virtual DbSet<Cuenta> Cuenta { set; get; }
+        
         //public virtual DbSet<Transaccion> Transaccion { set; get; }
 
         public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
@@ -34,7 +36,9 @@ namespace WSfinanceperson.Infrastructure.EF.Contexts
 
             var cuentaConfig = new CuentaWriteConfig();
             modelBuilder.ApplyConfiguration<Cuenta>(cuentaConfig);
-            modelBuilder.ApplyConfiguration<Categoria>(cuentaConfig);
+
+            var categoriaConfig = new CategoriaWriteConfig();
+            modelBuilder.ApplyConfiguration<Categoria>(categoriaConfig);
 
             modelBuilder.Ignore<DomainEvent>();
             //modelBuilder.Ignore<TransaccionConfirmada>();

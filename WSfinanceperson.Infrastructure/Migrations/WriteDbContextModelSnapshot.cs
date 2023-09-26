@@ -22,6 +22,27 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WSfinanceperson.Domain.Models.Categorias.Categoria", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CuentaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CuentaId");
+
+                    b.ToTable("Categorias", (string)null);
+                });
+
             modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
                 {
                     b.Property<Guid>("Id")
@@ -68,25 +89,13 @@ namespace WSfinanceperson.Infrastructure.Migrations
                     b.ToTable("Persona", (string)null);
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transaccion.Categoria", b =>
+            modelBuilder.Entity("WSfinanceperson.Domain.Models.Categorias.Categoria", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CuentaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CuentaId");
-
-                    b.ToTable("Categorias", (string)null);
+                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", null)
+                        .WithMany("_categoria")
+                        .HasForeignKey("CuentaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
@@ -98,15 +107,6 @@ namespace WSfinanceperson.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Persona");
-                });
-
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transaccion.Categoria", b =>
-                {
-                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", null)
-                        .WithMany("_categoria")
-                        .HasForeignKey("CuentaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>

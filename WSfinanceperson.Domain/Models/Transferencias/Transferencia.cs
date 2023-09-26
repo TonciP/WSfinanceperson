@@ -13,15 +13,17 @@ namespace WSfinanceperson.Domain.Models.Transferencia
         public DateTime FechaTransaferencia { get; private set; }
         public Guid CuentaOrigente { get; private set; }
         public Guid CuentaDestino { get; private set; }
+        public decimal Monto { get; private set; }
 
         public Transferencia() { }
 
-        public Transferencia(DateTime fechaTransaferencia, Guid cuentaOrigente, Guid cuentaDestino)
+        public Transferencia(DateTime fechaTransaferencia, Guid cuentaOrigente, Guid cuentaDestino, decimal monto)
         {
             Id = new Guid();
             FechaTransaferencia = fechaTransaferencia;
             CuentaOrigente = cuentaOrigente;
             CuentaDestino = cuentaDestino;
+            Monto = monto;
         }
     }
 }
