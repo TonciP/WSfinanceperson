@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Command\Transacciones\" />
-    <Folder Include="UseCases\DomainEventHandler\" />
   </ItemGroup>
 
   <ItemGroup>

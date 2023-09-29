@@ -15,6 +15,9 @@ namespace WSfinanceperson.Domain.Factories
         //public Guid CuentaId { get; private set; }
         //public Movimiento Tipo { get; private set; }
         //public Categoria Categoria { get; private set; }
-        Transaccion Create(decimal Monto, string descripcion, Guid cuentaId, Movimiento movimiento);
+        Transaccion Create(decimal Monto, string descripcion, Guid cuentaId, Movimiento movimiento, Guid categoriaId);
+
+        Transaccion CrearTransaccionIngreso();
+        Transaccion CrearTransaccionEgreso();
     }
 }

@@ -10,8 +10,6 @@
     <Folder Include="EF\Config\ReadConfig\" />
     <Folder Include="Migrations\" />
     <Folder Include="Services\" />
-    <Folder Include="Security\" />
-    <Folder Include="UseCases\Query\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,7 +17,9 @@ namespace Reserva.Aplication.Utils
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ICuentaFactory, CuentaFactory>();
+            services.AddScoped<ICuentaFactory, CuentaFactory>();
             services.AddScoped<ICategoriaFactory, CategoriaFactory>();
+            services.AddScoped<IPersonaFactory, PersonaFactory>();
             //services.AddScoped<IReservaFactory, ReservaFactory>();
             //services.AddScoped<ITipoHabitacionFactory, TipoHabitacionFactory>();
 

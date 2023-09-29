@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WSfinanceperson.Application.UseCases.Command.Cuentas.CrearCuenta;
 
 namespace WSfinanceperson.WebApi.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     public class CuentaController : ControllerBase
     {
         private readonly IMediator _mediator;
