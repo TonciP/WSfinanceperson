@@ -8,7 +8,7 @@ using WSfinanceperson.Domain.Models.Transaccion;
 
 namespace WSfinanceperson.Domain.Repositories
 {
-    public interface ITracsacionRepository : IRepository<Transaccion, Guid>
+    public interface ITransaccionRepository : IRepository<Transaccion, Guid>
     {
         Task UpdateAsync(Transaccion transaccion);
     }

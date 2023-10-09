@@ -1,19 +1,16 @@
 ﻿using ShareKernel.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WSfinanceperson.Domain.Events;
 using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Personas;
+using WSfinanceperson.Domain.Models.Transferencias;
 
 namespace WSfinanceperson.Domain.Models.Cuentas
 {
     public class Cuenta: AggregateRoot<Guid>
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public string Nombre {get; private set; }
-        public double SaldoInicial { get; private set; }
+        public decimal SaldoInicial { get; private set; }
         public Guid PersonaId { get; private set; }
         private readonly Persona _persona;
 
@@ -34,6 +31,7 @@ namespace WSfinanceperson.Domain.Models.Cuentas
             }
         }
 
+
         public Cuenta() { }
 
         public Cuenta(string nombre, Guid personaId)
@@ -44,16 +42,15 @@ namespace WSfinanceperson.Domain.Models.Cuentas
             this.PersonaId = personaId;
             //this._persona.Id = personaId;
             _categoria = new List<Categoria>();
+            AddDomainEvent(new CuentaCreada(this.Id, DateTime.Now));
         }
-        public void AdicionarCategoriaDefault(Guid cuentaId)
+        public void ActualizarSaldoTransaccion(decimal monto)
         {
-            Categoria Alimentacion = new Categoria(cuentaId, "Alimentacion");
-            Categoria Transporte = new Categoria(cuentaId, "Transporte");
-            Categoria Entretenimiento = new Categoria(cuentaId, "Entretenimiento");
-
-            _categoria.Add(Alimentacion);
-            _categoria.Add(Transporte);
-            _categoria.Add(Entretenimiento);
+            this.SaldoInicial -= monto;
+        }
+        public void ActualizarSaldoTransferencia(decimal monto)
+        {
+            this.SaldoInicial += monto;
         }
     }
 }

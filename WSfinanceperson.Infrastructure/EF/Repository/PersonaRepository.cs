@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Personas;
 using WSfinanceperson.Domain.Repositories;
 using WSfinanceperson.Infrastructure.EF.Contexts;
@@ -18,9 +19,9 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
         {
             _persona = context.Persona;
         }
-        public Task CreateAsync(Persona obj)
+        public async Task CreateAsync(Persona obj)
         {
-            throw new NotImplementedException();
+            await _persona.AddAsync(obj);
         }
 
         public async Task<Persona> FindByIdAsync(Guid id)

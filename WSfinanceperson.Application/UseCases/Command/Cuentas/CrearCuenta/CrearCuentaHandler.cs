@@ -31,6 +31,7 @@ namespace WSfinanceperson.Application.UseCases.Command.Cuentas.CrearCuenta
             await _cuentaRepository.CreateAsync(cuenta);
             await _unitOfWork.Commit();
 
+
             return cuenta.Id;
         }
     }

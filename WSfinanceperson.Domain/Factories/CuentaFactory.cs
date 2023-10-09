@@ -1,5 +1,4 @@
-﻿using SharedKernel.IntegrationEvents;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +15,9 @@ namespace WSfinanceperson.Domain.Factories
         public Cuenta Create(string nombre,Guid personaId)
         {
             var obj = new Cuenta(nombre, personaId);
-            //var domainEvent = new CuentaCreada(obj.Id, nombre, precioVenta, DateTime.Now);
+            //var domainEvent = new CuentaCreada(obj.Id, DateTime.Now);
 
             //obj.AddDomainEvent(domainEvent);
-
             return obj;
         }
 

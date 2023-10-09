@@ -10,5 +10,6 @@ namespace WSfinanceperson.Domain.Factories
     public interface ICategoriaFactory
     {
         Categoria Create(Guid cuentaId, string nombre);
+        //Categoria CreateRange(Categoria[] categorias);
     }
 }

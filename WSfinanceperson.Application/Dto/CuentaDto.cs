@@ -12,8 +12,8 @@ namespace WSfinanceperson.Application.Dto
     {
         public Guid Id { get; set; }
         public string Nombre { get; set; }
-        public double SaldoInicial { get; set; }
-        public Persona Persona{ get; set; }
-        public List<Categoria> Categorias { get; set; }  
+        public decimal SaldoInicial { get; set; }
+        public PersonaDto? Persona{ get; set; }
+        public List<CategoriaDto>? Categorias { get; set; }
     }
 }

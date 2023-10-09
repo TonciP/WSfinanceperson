@@ -9,7 +9,7 @@ namespace WSfinanceperson.Domain.Models.Categorias
 {
     public class Categoria : AggregateRoot<Guid>
     {
-        public Guid Id { get; private set; }
+        //public Guid Id { get; private set; }
         public Guid CuentaId { get; private set; }
         public string Nombre { get; private set; }
 

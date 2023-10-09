@@ -13,10 +13,10 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-            builder.ToTable("Categorias");
+            builder.ToTable("Categoria");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Nombre).HasColumnName("name").IsRequired();
+            builder.Property(x => x.Nombre).HasColumnName("nombre").IsRequired();
 
             builder.Ignore("_domainEvents");
             builder.Ignore(x => x.DomainEvents);

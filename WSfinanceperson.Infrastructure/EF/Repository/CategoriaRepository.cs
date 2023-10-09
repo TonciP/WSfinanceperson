@@ -23,6 +23,10 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
         {
             await _categorias.AddAsync(obj);
         }
+        public async Task CreateRangeAsync(Categoria[] obj)
+        {
+            await _categorias.AddRangeAsync(obj);
+        }
 
         public Task<Categoria> FindByIdAsync(Guid id)
         {

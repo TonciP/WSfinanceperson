@@ -1,8 +1,11 @@
-﻿namespace ShareKernel.Core
+﻿using System;
+using System.Collections.Generic;
+
+namespace ShareKernel.Core
 {
-    public abstract class Entity
+    public abstract class Entity<TId>
     {
-        public Guid Id { get; protected set; }
+        public TId Id { get; protected set; }
 
         private readonly ICollection<DomainEvent> _domainEvents;
 

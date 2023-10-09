@@ -20,8 +20,7 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query
     internal class LoginHandler : IRequestHandler<LoginUserDto, Result<string>>
     {
         private readonly DbSet<PersonaReadModel> persona;
-        public string tipo { get { return "PersonaController"; } }
-        public static string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
+        private string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public LoginHandler(ReadDbContext dbContext)
         {

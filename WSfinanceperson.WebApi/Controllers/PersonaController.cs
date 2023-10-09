@@ -8,6 +8,8 @@ using System.Security.Claims;
 using System.Text;
 using WSfinanceperson.Application.Dto;
 using WSfinanceperson.Application.UseCases.Auth.Personas;
+using WSfinanceperson.Application.UseCases.Command.Categorias.CrearCategoria;
+using WSfinanceperson.Application.UseCases.Command.Personas.CrearRegistro;
 
 namespace WSfinanceperson.WebApi.Controllers
 {
@@ -42,6 +44,14 @@ namespace WSfinanceperson.WebApi.Controllers
             {
                 return Unauthorized();
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> CrearRegistro([FromBody] CrearRegistroCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
 

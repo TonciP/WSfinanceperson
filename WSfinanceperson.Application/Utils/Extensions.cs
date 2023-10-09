@@ -20,6 +20,8 @@ namespace Reserva.Aplication.Utils
             services.AddScoped<ICuentaFactory, CuentaFactory>();
             services.AddScoped<ICategoriaFactory, CategoriaFactory>();
             services.AddScoped<IPersonaFactory, PersonaFactory>();
+            services.AddScoped<ITransaccionFactory, TransaccionFactory>();
+            services.AddScoped<ITransferenciaFactory, TransferenciaFactory>();
             //services.AddScoped<IReservaFactory, ReservaFactory>();
             //services.AddScoped<ITipoHabitacionFactory, TipoHabitacionFactory>();
 

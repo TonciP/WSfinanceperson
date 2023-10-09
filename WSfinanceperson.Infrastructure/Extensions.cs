@@ -40,6 +40,8 @@ namespace WSfinanceperson.Infrastructure
             services.AddScoped<ICuentaRepository, CuentaRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IPersonaRepository, PersonaRepository>();
+            services.AddScoped<ITransaccionRepository, TransaccionRepository>();
+            services.AddScoped<ITransferenciaRepository, TransferenciaRepository>();
             //services.AddScoped<ITrackingRepository, TrackingRepository>();
             ////services.AddScoped<IHabitacionRepository, HabitacionRepository>();
             //services.AddScoped<ITipoHabitacionRepository, TipoHabitacionRepository>();

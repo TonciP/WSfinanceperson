@@ -15,5 +15,6 @@ namespace WSfinanceperson.Domain.Factories
             var obj = new Categoria(cuentaId, nombre);
             return obj;
         }
+
     }
 }

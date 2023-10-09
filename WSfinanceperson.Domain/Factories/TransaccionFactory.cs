@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventario.Domain.Models.Transacciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,9 @@ namespace WSfinanceperson.Domain.Factories
             return new Transaccion(Movimiento.Ingreso);
         }
 
-        public Transaccion Create(decimal monto, string descripcion, Guid cuentaId, Movimiento movimiento, Guid categoriaId)
+        public Transaccion Create(decimal monto, string descripcion, Guid cuentaId, Movimiento movimiento, EstadoTransaccion estadoTransaccion, Guid categoriaId)
         {
-            return new Transaccion(monto, descripcion,cuentaId, Movimiento.Ingreso, categoriaId);
+            return new Transaccion(monto, descripcion,cuentaId, movimiento, estadoTransaccion, categoriaId);
         }
     }
 }

@@ -23,14 +23,15 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
             await _cuentas.AddAsync(obj);
         }
 
-        public Task<Cuenta> FindByIdAsync(Guid id)
+        public async Task<Cuenta> FindByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _cuentas.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task UpdateAsync(Cuenta obj)
         {
-            throw new NotImplementedException();
+            _cuentas.Update(obj);
+            return Task.CompletedTask;
         }
     }
 }

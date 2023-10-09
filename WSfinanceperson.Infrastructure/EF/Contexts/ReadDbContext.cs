@@ -14,7 +14,11 @@ namespace WSfinanceperson.Infrastructure.EF.Contexts
         : DbContext
     {
         public virtual DbSet<PersonaReadModel> Persona { get; set; }
-        //public virtual DbSet<TransaccionReadModel> Transaccion { set; get; }
+        public virtual DbSet<CategoriaReadModel> Categoria { set; get; }
+        public virtual DbSet<CuentaReadModel> Cuenta { set; get; }
+        public virtual DbSet<TransaccionReadModel> Transaccion { set; get; }
+        public virtual DbSet<TransferenciaReadModel> Transferencia { set; get; }
+
         public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
         {
         }
@@ -25,6 +29,9 @@ namespace WSfinanceperson.Infrastructure.EF.Contexts
 
             var personaConfig = new PersonaReadConfig();
             modelBuilder.ApplyConfiguration<PersonaReadModel>(personaConfig);
+
+            var transaccionConfig = new TransaccionReadConfig();
+            modelBuilder.ApplyConfiguration<TransaccionReadModel>(transaccionConfig);
 
             //var transaccionConfig = new TransaccionReadConfig();
             //modelBuilder.ApplyConfiguration<TransaccionReadModel>(transaccionConfig);
