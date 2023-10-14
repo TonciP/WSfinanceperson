@@ -19,8 +19,8 @@ namespace WSfinanceperson.WebApi.Controllers
     public class PersonaController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public static string tipo { get { return "PersonaController"; } }
-        public static string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
+        //public static string tipo { get { return "PersonaController"; } }
+        //public static string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public PersonaController(IMediator mediator)
         {
@@ -35,6 +35,7 @@ namespace WSfinanceperson.WebApi.Controllers
             var result = await _mediator.Send(new LoginUserDto(correo, contrasena));
             if (result.Success)
             {
+                //return Ok(result.Value.ToString());
                 return Ok(new
                 {
                     jwt = result.Value,
@@ -45,6 +46,7 @@ namespace WSfinanceperson.WebApi.Controllers
                 return Unauthorized();
             }
         }
+
 
         [AllowAnonymous]
         [HttpPost]

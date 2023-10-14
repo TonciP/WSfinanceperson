@@ -15,8 +15,8 @@ namespace WSfinanceperson.Infrastructure.EF.ReadModel
         public decimal Monto { get; set; }
         public string Descripcion { get; set; }
         public CuentaReadModel Cuenta { get; set; }
-        //public Guid CuentaId { get; set; }
-        //public Guid CategoriaId { get; set; }
+        public Guid CuentaId { get; set; }
+        public Guid CategoriaId { get; set; }
         public CategoriaReadModel Categoria { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string Tipo { get; set; }

@@ -12,9 +12,9 @@ namespace WSfinanceperson.Domain.Factories
 {
     public class CuentaFactory : ICuentaFactory
     {
-        public Cuenta Create(string nombre,Guid personaId)
+        public Cuenta Create(string nombre, decimal saldoInicial, Guid personaId)
         {
-            var obj = new Cuenta(nombre, personaId);
+            var obj = new Cuenta(nombre, saldoInicial, personaId);
             //var domainEvent = new CuentaCreada(obj.Id, DateTime.Now);
 
             //obj.AddDomainEvent(domainEvent);

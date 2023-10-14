@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using WSfinanceperson.Application.Services;
 using WSfinanceperson.Infrastructure;
+using WSfinanceperson.Infrastructure.Services;
 
 namespace Inventario.WebApi
 {
@@ -46,7 +48,6 @@ namespace Inventario.WebApi
                         ClockSkew = TimeSpan.FromMinutes(5)
                     };
                 });
-
             services.AddAuthorization();
             services.AddCors(c => c.AddPolicy("CorsPolicy", builder =>
             {

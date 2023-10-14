@@ -10,8 +10,6 @@ namespace WSfinanceperson.WebApi.Controllers
     {
 
         private readonly IMediator _mediator;
-        public static string tipo { get { return "TransferenciaController"; } }
-        public static string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public TransferenciaController(IMediator mediator)
         {

@@ -12,8 +12,8 @@ using WSfinanceperson.Infrastructure.EF.Contexts;
 namespace WSfinanceperson.Infrastructure.Migrations
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20231008222852_alter transferencia")]
-    partial class altertransferencia
+    [Migration("20231012020542_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

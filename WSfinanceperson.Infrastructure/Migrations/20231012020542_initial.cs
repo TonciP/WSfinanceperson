@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WSfinanceperson.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigrate : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,7 @@ namespace WSfinanceperson.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    saldoInicial = table.Column<double>(type: "float", nullable: false),
+                    saldoInicial = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PersonaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -93,24 +93,24 @@ namespace WSfinanceperson.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     fechaTransferencia = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CuentaOrigenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CuentaDestinoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     monto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     tipo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    estado = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    cuentadestinoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    cuentaorigenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    estado = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transferencia", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transferencia_Cuenta_cuentadestinoId",
-                        column: x => x.cuentadestinoId,
+                        name: "FK_Transferencia_Cuenta_CuentaDestinoId",
+                        column: x => x.CuentaDestinoId,
                         principalTable: "Cuenta",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Transferencia_Cuenta_cuentaorigenId",
-                        column: x => x.cuentaorigenId,
+                        name: "FK_Transferencia_Cuenta_CuentaOrigenId",
+                        column: x => x.CuentaOrigenId,
                         principalTable: "Cuenta",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
@@ -132,14 +132,14 @@ namespace WSfinanceperson.Infrastructure.Migrations
                 column: "CuentaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transferencia_cuentadestinoId",
+                name: "IX_Transferencia_CuentaDestinoId",
                 table: "Transferencia",
-                column: "cuentadestinoId");
+                column: "CuentaDestinoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transferencia_cuentaorigenId",
+                name: "IX_Transferencia_CuentaOrigenId",
                 table: "Transferencia",
-                column: "cuentaorigenId");
+                column: "CuentaOrigenId");
         }
 
         /// <inheritdoc />

@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WSfinanceperson.Domain.Events;
+using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Domain.Models.Personas
 {
     public class Persona : AggregateRoot<Guid>
     {
         //public Guid Id { get; private set; }
-        public string Correo { get; private set; }
-        public string Contrasena { get; private set; }
+        public EmailValidValue Correo { get; private set; }
+        public Password Contrasena { get; private set; }
 
         public Persona () { }
 

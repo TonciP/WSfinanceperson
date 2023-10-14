@@ -28,6 +28,7 @@ namespace WSfinanceperson.Application.UseCases.DomainEventHandler.Persona
         {
             var cuenta = _cuentaFactory.Create(
                                nombre: "Cuenta Personal",
+                               saldoInicial: 0,
                                               personaId: notification.PersonaId
                                                          );
 

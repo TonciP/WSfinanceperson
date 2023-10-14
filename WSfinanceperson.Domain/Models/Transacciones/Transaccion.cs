@@ -9,13 +9,15 @@ using WSfinanceperson.Domain.Events;
 using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Personas;
+using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Domain.Models.Transaccion
 {
     public class Transaccion : AggregateRoot<Guid>
     {
         //public Guid Id { get; private set; }
-        public decimal Monto { get; private set; }
+        //public decimal Monto { get; private set; }
+        public MontoTransferencia Monto { get; private set; }
         public string Descripcion { get; private set; }
         public Guid CuentaId { get; private set; }
         private readonly Cuenta _cuenta;
@@ -30,7 +32,8 @@ namespace WSfinanceperson.Domain.Models.Transaccion
         public Movimiento Tipo { get; private set; }
         public EstadoTransaccion Estado { get; private set; }
         public Guid CategoriaId { get; private set; }
-        public DateTime FechaRegistro { get; private set; }
+        //public DateTime FechaRegistro { get; private set; }
+        public FechaTransaccion FechaRegistro { get; private set; }
 
         private readonly Categoria _categoria;
 

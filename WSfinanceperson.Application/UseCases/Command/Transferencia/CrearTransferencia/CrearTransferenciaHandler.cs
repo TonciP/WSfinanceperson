@@ -16,15 +16,32 @@ namespace WSfinanceperson.Application.UseCases.Command.Transferencia.CrearTransf
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITransferenciaFactory _transaccionFactory;
         private readonly ITransferenciaRepository _transaccionRepository;
+        private readonly ICuentaRepository _cuentaRepository;
 
-        public CrearTransferenciaHandler(IUnitOfWork unitOfWork, ITransferenciaFactory transaccionFactory, ITransferenciaRepository transaccionRepository)
+        public CrearTransferenciaHandler(IUnitOfWork unitOfWork, 
+            ITransferenciaFactory transaccionFactory, 
+            ITransferenciaRepository transaccionRepository,
+            ICuentaRepository cuentaRepository
+            )
         {
             _unitOfWork = unitOfWork;
             _transaccionFactory = transaccionFactory;
             _transaccionRepository = transaccionRepository;
+            _cuentaRepository = cuentaRepository;
         }
         public async Task<Guid> Handle(CrearTransferenciaCommand request, CancellationToken cancellationToken)
         {
+            var cuenta = await _cuentaRepository.FindByIdAsync(request.CuentaOrigenId);
+            if (cuenta == null)
+            {
+                throw new Exception("La cuenta no existe");
+            }
+
+            decimal saldoCuenta = cuenta.SaldoInicial;
+
+            if (saldoCuenta == 0 || saldoCuenta < request.Monto)
+                throw new Exception("La cuenta no cuenta con suficiente fondo");
+
             var transferencia = _transaccionFactory.Create(request.FechaTransaferencia, request.CuentaOrigenId, 
                 request.CuentaDestinoId, request.Monto, Domain.Models.Transaccion.Movimiento.Ingreso, 
                 Inventario.Domain.Models.Transacciones.EstadoTransaccion.Confirmado);

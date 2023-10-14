@@ -10,7 +10,10 @@ namespace WSfinanceperson.Application.Services
 {
     public interface ISecurityService
     {
-        Task<Result<string>> Login(string correo, string contrasena);
-        Task<Result> Register(RegisterUserModel model);
+        //Task<Result<string>> Login(string correo, string contrasena);
+        //Task<Result> Register(RegisterUserModel model);
+
+        Result<string> CreateHashPassword(string contrasena);
+        Result<string> CreateToken(string username);
     }
 }

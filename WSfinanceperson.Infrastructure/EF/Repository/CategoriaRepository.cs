@@ -28,9 +28,9 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
             await _categorias.AddRangeAsync(obj);
         }
 
-        public Task<Categoria> FindByIdAsync(Guid id)
+        public async Task<Categoria> FindByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _categorias.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task UpdateAsync(Categoria obj)

@@ -1,22 +1,25 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Azure.Core;
+using Microsoft.Extensions.Logging;
 using Security.Infrastructure.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using WSfinanceperson.Application.Dto;
 using WSfinanceperson.Application.Services;
 using WSfinanceperson.Application.Utils;
 using WSfinanceperson.Domain.Models.Personas;
+using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Sockets;
+using System.Security.Claims;
 
 namespace WSfinanceperson.Infrastructure.Services
 {
-    internal class SecurityService : ISecurityService
+    public class SecurityService : ISecurityService
     {
         private readonly Persona _persona;
         private readonly JwtOptions _jwtOptions;
         private readonly ILogger<SecurityService> _logger;
+        private string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public SecurityService(Persona persona, JwtOptions jwtOptions,
             ILogger<SecurityService> logger)
@@ -25,15 +28,57 @@ namespace WSfinanceperson.Infrastructure.Services
             _jwtOptions = jwtOptions;
             _logger = logger;
         }
-        public Task<Result<string>> Login(string correo, string contrasena)
+
+        public Result<string> CreateHashPassword(string contrasena)
         {
-            //var user = _persona.
-            throw new NotImplementedException();
+            byte[] data =  Encoding.ASCII.GetBytes(contrasena);
+            byte[] result = new SHA256Managed().ComputeHash(data);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+
+                // Convertimos los valores en hexadecimal
+                // cuando tiene una cifra hay que rellenarlo con cero
+                // para que siempre ocupen dos dígitos.
+                if (result[i] < 16)
+                {
+                    sb.Append("0");
+                }
+                sb.Append(result[i].ToString("x"));
+            }
+
+            return new Result<string>(sb.ToString(), true, "Hash creado");
         }
 
-        public Task<Result> Register(RegisterUserModel model)
+        public Result<string> CreateToken(string username)
         {
-            throw new NotImplementedException();
+            var claims = new Claim[]
+           {
+            new Claim(ClaimTypes.Name, username),
+                        new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
+            new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds().ToString()),
+           };
+            var token = new JwtSecurityToken(
+                new JwtHeader(
+                    new SigningCredentials(
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+                        SecurityAlgorithms.HmacSha256)
+                        ),
+                new JwtPayload(claims));
+            string tokeSecurityHandler = new JwtSecurityTokenHandler().WriteToken(token);
+            return new Result<string>(tokeSecurityHandler, true, "User Succed");
         }
+
+        //public Task<Result<string>> Login(string correo, string contrasena)
+        //{
+        //    //var user = _persona.
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task<Result> Register(RegisterUserModel model)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -3,6 +3,7 @@ using ShareKernel.Core;
 using WSfinanceperson.Domain.Events;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Transaccion;
+using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Domain.Models.Transferencias
 {
@@ -30,7 +31,8 @@ namespace WSfinanceperson.Domain.Models.Transferencias
                 return cuentadestino;
             }
         }
-        public decimal Monto { get; private set; }
+        //public decimal Monto { get; private set; }
+        public MontoTransferencia Monto { get; private set; }
         public Movimiento Tipo { get; private set; }
         public EstadoTransaccion Estado { get; private set; }
         //public Guid CateogriaId { get; private set; }

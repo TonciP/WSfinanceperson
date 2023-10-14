@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Reserva.Aplication.Utils;
 using MediatR;
 using WSfinanceperson.Infrastructure.EF.Repository;
+using WSfinanceperson.Application.Services;
+using WSfinanceperson.Infrastructure.Services;
 
 namespace WSfinanceperson.Infrastructure
 {
@@ -42,6 +44,8 @@ namespace WSfinanceperson.Infrastructure
             services.AddScoped<IPersonaRepository, PersonaRepository>();
             services.AddScoped<ITransaccionRepository, TransaccionRepository>();
             services.AddScoped<ITransferenciaRepository, TransferenciaRepository>();
+            
+            //services.AddScoped<ISecurityService, SecurityService>();
             //services.AddScoped<ITrackingRepository, TrackingRepository>();
             ////services.AddScoped<IHabitacionRepository, HabitacionRepository>();
             //services.AddScoped<ITipoHabitacionRepository, TipoHabitacionRepository>();

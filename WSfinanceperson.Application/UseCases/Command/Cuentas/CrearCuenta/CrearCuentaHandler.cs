@@ -25,7 +25,7 @@ namespace WSfinanceperson.Application.UseCases.Command.Cuentas.CrearCuenta
 
         public async Task<Guid> Handle(CrearCuentaCommand request, CancellationToken cancellationToken)
         {
-            var cuenta = _cuentaFactory.Create(request.NombreCuenta, request.PersonaId);
+            var cuenta = _cuentaFactory.Create(request.NombreCuenta, request.saldoInicial, request.PersonaId);
             //cuenta.AdicionarCategoriaDefault(cuentaId: cuenta.Id);
 
             await _cuentaRepository.CreateAsync(cuenta);

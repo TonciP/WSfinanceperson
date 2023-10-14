@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Transferencias;
+using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 {
@@ -25,7 +27,14 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 
             builder.HasOne(x => x.Persona);
 
-            builder.Property(x => x.SaldoInicial).HasColumnName("saldoInicial");
+            var saldoCuentaConverter = new ValueConverter<SaldoCuenta, decimal>(
+                saldoCuentaValue => saldoCuentaValue.Value,
+                saldocuenta => new SaldoCuenta(saldocuenta)
+            );
+
+            builder.Property(x => x.SaldoInicial)
+                .HasConversion(saldoCuentaConverter)
+                .HasColumnName("saldoInicial");
 
             builder.HasMany(typeof(Categoria), "_categoria");
             //builder.HasMany(typeof(Transferencia), "_transferencia");

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Transaccion;
 using WSfinanceperson.Domain.Models.Transferencias;
+using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 {
@@ -36,7 +37,14 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
             //builder.HasOne(x => x.CuentaDestino);
             builder.HasOne(typeof(Cuenta), "cuentadestino");
 
-            builder.Property(x => x.Monto).HasColumnName("monto");
+            var montoConverter = new ValueConverter<MontoTransferencia, decimal>(
+                               montoValue => montoValue.Value,
+                                              monto => new MontoTransferencia(monto)
+                                                         );
+
+            builder.Property(x => x.Monto)
+                .HasConversion(montoConverter)
+                .HasColumnName("monto");
 
             var tipoConverter = new ValueConverter<Movimiento, string>(
                 tipoEnumValue => tipoEnumValue.ToString(),

@@ -24,49 +24,55 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query.Transacciones
         }
         public async Task<ICollection<TransaccionDto>> Handle(HistorialTransaccionesQuery request, CancellationToken cancellationToken)
         {
+            //    var transaccionList = await _transaccion
+            //                    .AsNoTracking()
+            //                    //.Include(x => x.Cuenta)
+            //                    //.Include(x => x.Categoria)
+            //                    .Where(
+            //                        x => x.FechaRegistro.ToString().Contains(request.FechaRegistro.ToString()) ||
+            //                        x.CuentaId.ToString().Contains(request.CuentaId.ToString()) ||
+            //                        x.CategoriaId.ToString().Contains(request.CategoriaId.ToString())
+            //                        ).ToListAsync();
             var transaccionList = await _transaccion
-                            .AsNoTracking()
-                            .Include(x => x.Cuenta)
-                            .Include(x => x.Categoria)
-                            .Where(
-                                x => x.FechaRegistro.ToString().Contains(request.FechaRegistro.ToString()) ||
-                                x.Cuenta.Id.ToString().Contains(request.CuentaId.ToString()) ||
-                                x.Categoria.Id.ToString().Contains(request.CategoriaId.ToString())
-                                ).
-                            Include(x => x.Cuenta)
-                            .Include(x => x.Categoria).ToListAsync();
-                            //.Include(x => x.Categoria).ToListAsync();
-                            //.Where(x => 
-                            //x.CuentaId.ToString().Contains(request.CuentaId.ToString())  || 
-                            //x.FechaRegistro == request.FechaRegistro || x.CategoriaId.ToString().Contains(request.CategoriaId.ToString()))
-                            //.ToListAsync();
+                           .AsNoTracking()
+                           .Include(x => x.Cuenta)
+                           .Include(x => x.Categoria)
+                           .Where(
+                               x => x.FechaRegistro == request.FechaRegistro ||
+                               x.CuentaId == request.CuentaId ||
+                               x.CategoriaId == request.CategoriaId
+                               ).ToListAsync();
 
             var result = new List<TransaccionDto>();
 
-            foreach(var t in transaccionList)
+            if (transaccionList.Any())
             {
-                var transaccion = new TransaccionDto
+                foreach (var t in transaccionList)
                 {
-                    Monto = t.Monto,
-                    Descripcion = t.Descripcion,
-                    Cuenta = new CuentaDto
+                    var transaccion = new TransaccionDto
                     {
-                        Id = t.Cuenta.Id,
-                        Nombre = t.Cuenta.Nombre,
-                        SaldoInicial = t.Cuenta.SaldoInicial,
-                    },
-                    Categoria = new CategoriaDto
-                    {
-                        Id = t.Categoria.Id,
-                        CuentaId = t.Categoria.CuentaId,
-                        Nombre = t.Categoria.Nombre,
-                    },
-                    FechaRegistro = t.FechaRegistro,
-                    Tipo = t.Tipo,
-                    Estado = t.Estado,
-                };
-                result.Add(transaccion);
+                        Monto = t.Monto,
+                        Descripcion = t.Descripcion,
+                        Cuenta = new CuentaDto
+                        {
+                            Id = t.Cuenta.Id,
+                            Nombre = t.Cuenta.Nombre,
+                            SaldoInicial = t.Cuenta.SaldoInicial,
+                        },
+                        Categoria = new CategoriaDto
+                        {
+                            Id = t.Categoria.Id,
+                            CuentaId = t.Categoria.CuentaId,
+                            Nombre = t.Categoria.Nombre,
+                        },
+                        FechaRegistro = t.FechaRegistro,
+                        Tipo = t.Tipo,
+                        Estado = t.Estado,
+                    };
+                    result.Add(transaccion);
+                }
             }
+            
 
             return result;
         }

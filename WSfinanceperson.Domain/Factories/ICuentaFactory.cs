@@ -9,6 +9,6 @@ namespace WSfinanceperson.Domain.Factories
 {
     public interface ICuentaFactory
     {
-        Cuenta Create(string nombre, Guid personaId);
+        Cuenta Create(string nombre, decimal saldoInicial, Guid personaId);
     }
 }

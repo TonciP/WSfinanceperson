@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Transaccion;
+using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 {
@@ -20,7 +21,15 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
             builder.ToTable("Transaccion");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Monto).HasColumnName("monto");
+            var montotransConverter = new ValueConverter<MontoTransferencia, decimal>(
+                montoTransValue => montoTransValue.Value,
+                montoTrans => new MontoTransferencia(montoTrans)
+            );
+
+            builder.Property(x => x.Monto)
+                .HasConversion(montotransConverter)
+                .HasColumnName("monto");
+
             builder.Property(x => x.Descripcion).HasColumnName("descripcion");
             builder.HasOne(x => x.Cuenta);
             //builder.HasOne(typeof(Cuenta), "_cuenta");
@@ -50,8 +59,14 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
             builder.HasOne(x => x.Categoria);
             //builder.HasOne(typeof(Categoria), "_categoria");
 
+            var fechaTransConverter = new ValueConverter<FechaTransaccion, DateTime>(
+                fechaTransValue => fechaTransValue.Value,
+                fechatrans => new FechaTransaccion(fechatrans)
+            );
+
             builder.Property(x => x.FechaRegistro)
                 .HasColumnName("fechaRegistro")
+                .HasConversion(fechaTransConverter)
                 .IsRequired();
 
             builder.Ignore("_domainEvents");
