@@ -12,7 +12,7 @@ namespace WSfinanceperson.Domain.Events
     public record CuentaCreada
         : DomainEvent
     {
-        public Guid CuentaId { get; }
+        public Guid CuentaId { get; set; }
         //List<Categoria> Categorias { get; init; }
         //public Guid PersonaId { get;  set; }
         public CuentaCreada(Guid cuentaId, DateTime occuredOn) : base(occuredOn)

@@ -39,18 +39,12 @@ namespace WSfinanceperson.Infrastructure
             //Transient: se crea una instancia por cada uso
             //Singleton: se crea una instancia por cada aplicación
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPersonaRepository, PersonaRepository>();
             services.AddScoped<ICuentaRepository, CuentaRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-            services.AddScoped<IPersonaRepository, PersonaRepository>();
             services.AddScoped<ITransaccionRepository, TransaccionRepository>();
             services.AddScoped<ITransferenciaRepository, TransferenciaRepository>();
-            
-            //services.AddScoped<ISecurityService, SecurityService>();
-            //services.AddScoped<ITrackingRepository, TrackingRepository>();
-            ////services.AddScoped<IHabitacionRepository, HabitacionRepository>();
-            //services.AddScoped<ITipoHabitacionRepository, TipoHabitacionRepository>();
-            //services.AddScoped<IReservarRepository, ReservaRepository>();
-            //services.AddScoped<IEstadiaRepository, EstadiaRepository>();
+           
 
             return services;
         }

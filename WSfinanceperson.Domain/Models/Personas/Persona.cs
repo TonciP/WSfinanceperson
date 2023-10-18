@@ -19,9 +19,9 @@ namespace WSfinanceperson.Domain.Models.Personas
 
         public Persona(string correo, string contrasena)
         {
-            this.Id = Guid.NewGuid();
-            this.Correo = correo;
-            this.Contrasena = contrasena;
+            Id = Guid.NewGuid();
+            Correo = correo;
+            Contrasena = contrasena;
             AddDomainEvent(new PersonaCreada(this.Id, DateTime.Now));
         }
     }

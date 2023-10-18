@@ -14,37 +14,17 @@ namespace WSfinanceperson.Domain.Models.Cuentas
         //public decimal SaldoInicial { get; private set; }
         public SaldoCuenta SaldoInicial { get; private set; }
         public Guid PersonaId { get; private set; }
-        private readonly Persona _persona;
-
-        public Persona Persona
-        {
-            get
-            {
-                return _persona;
-            }
-        } 
-
-        private readonly List<Categoria> _categoria;
-        public IEnumerable<Categoria> Categorias
-        {
-            get
-            {
-                return _categoria;
-            }
-        }
-
 
         public Cuenta() { }
 
         public Cuenta(string nombre, decimal saldoInicial, Guid personaId)
         {
-            this.Id = Guid.NewGuid();
-            this.Nombre = nombre;
-            this.SaldoInicial = saldoInicial;
-            this.PersonaId = personaId;
+            Id = Guid.NewGuid();
+            Nombre = nombre;
+            SaldoInicial = saldoInicial;
+            PersonaId = personaId;
             //this._persona.Id = personaId;
-            _categoria = new List<Categoria>();
-            AddDomainEvent(new CuentaCreada(this.Id, DateTime.Now));
+            AddDomainEvent(new CuentaCreada(Id, DateTime.Now));
         }
 
         public void ActualizarCuenta(string nombre, decimal saldoInicial)

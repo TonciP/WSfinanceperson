@@ -27,15 +27,20 @@ namespace WSfinanceperson.Infrastructure.EF.Contexts
         {
             base.OnModelCreating(modelBuilder);
 
-            var personaConfig = new PersonaReadConfig();
-            modelBuilder.ApplyConfiguration<PersonaReadModel>(personaConfig);
+            //var personaConfig = new PersonaReadConfig();
+            //modelBuilder.ApplyConfiguration<PersonaReadModel>(personaConfig);
 
-            var transaccionConfig = new TransaccionReadConfig();
-            modelBuilder.ApplyConfiguration<TransaccionReadModel>(transaccionConfig);
+            //var cuentaConfig = new CuentaReadConfig();
+            //modelBuilder.ApplyConfiguration<CuentaReadModel>(cuentaConfig);
+
+            //var categoriaConfig = new CategoriaReadConfig();
+            //modelBuilder.ApplyConfiguration<CategoriaReadModel>(categoriaConfig);
 
             //var transaccionConfig = new TransaccionReadConfig();
             //modelBuilder.ApplyConfiguration<TransaccionReadModel>(transaccionConfig);
-            //modelBuilder.ApplyConfiguration<DetalleTransaccionReadModel>(transaccionConfig);
+
+            //var transferenciaConfig = new TransferenciaReadConfig();
+            //modelBuilder.ApplyConfiguration<TransferenciaReadModel>(transferenciaConfig);
 
             //modelBuilder.Ignore<DomainEvent>();
             //modelBuilder.Ignore<TransaccionConfirmada>();

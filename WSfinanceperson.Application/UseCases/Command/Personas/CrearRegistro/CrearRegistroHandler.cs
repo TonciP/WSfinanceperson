@@ -29,11 +29,11 @@ namespace WSfinanceperson.Application.UseCases.Command.Personas.CrearRegistro
         }
         public async Task<Guid> Handle(CrearRegistroCommand request, CancellationToken cancellationToken)
         {
-            string hash = hashSecutiry(request.Contrasena);
-            //Devolvemos la cadena con el hash en mayúsculas para que quede más chuli :)
+            //string hash = hashSecutiry(request.Contrasena);
+            ////Devolvemos la cadena con el hash en mayúsculas para que quede más chuli :)
 
-            var persona = _personaFactory.Create(request.Correo, hash);
-
+            //var persona = _personaFactory.Create(request.Correo, hash);
+            var persona = _personaFactory.Create(request.Correo, request.Contrasena);
             await _personaRepository.CreateAsync(persona);
             await _unitOfWork.Commit();
 

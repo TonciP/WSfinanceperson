@@ -10,8 +10,8 @@ using WSfinanceperson.Infrastructure.EF.Contexts;
 
 namespace WSfinanceperson.Infrastructure.Migrations
 {
-    [DbContext(typeof(WriteDbContext))]
-    partial class WriteDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ReadDbContext))]
+    partial class ReadDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,14 +22,15 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Categorias.Categoria", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.CategoriaReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CuentaId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CuentaId");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -40,10 +41,10 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.HasIndex("CuentaId");
 
-                    b.ToTable("Categoria", (string)null);
+                    b.ToTable("Categoria");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,7 +56,8 @@ namespace WSfinanceperson.Infrastructure.Migrations
                         .HasColumnName("nombre");
 
                     b.Property<Guid>("PersonaId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("PersonaId");
 
                     b.Property<decimal>("SaldoInicial")
                         .HasColumnType("decimal(18,2)")
@@ -65,10 +67,10 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.HasIndex("PersonaId");
 
-                    b.ToTable("Cuenta", (string)null);
+                    b.ToTable("Cuenta");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Personas.Persona", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.PersonaReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,20 +88,22 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persona", (string)null);
+                    b.ToTable("Persona");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transaccion.Transaccion", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.TransaccionReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoriaId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CategoriaId");
 
                     b.Property<Guid>("CuentaId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CuentaId");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -108,8 +112,7 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("estado");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -122,36 +125,38 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<string>("Tipo")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("tipo");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.HasIndex("CuentaId");
 
-                    b.ToTable("Transaccion", (string)null);
+                    b.ToTable("Transaccion");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transferencias.Transferencia", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.TransferenciaReadModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CuentaDestinoId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CuentaDestinoId");
 
                     b.Property<Guid>("CuentaOrigenId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CuentaOrigenId");
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("estado");
 
-                    b.Property<DateTime>("FechaTransaferencia")
+                    b.Property<DateTime>("FechaTransferencia")
                         .HasColumnType("datetime2")
                         .HasColumnName("fechaTransferencia");
 
@@ -161,8 +166,7 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<string>("Tipo")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("tipo");
 
                     b.HasKey("Id");
@@ -171,33 +175,13 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.HasIndex("CuentaOrigenId");
 
-                    b.ToTable("Transferencia", (string)null);
+                    b.ToTable("Transferencia");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Categorias.Categoria", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.CategoriaReadModel", b =>
                 {
-                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", null)
-                        .WithMany("_categoria")
-                        .HasForeignKey("CuentaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
-                {
-                    b.HasOne("WSfinanceperson.Domain.Models.Personas.Persona", "Persona")
-                        .WithMany()
-                        .HasForeignKey("PersonaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Persona");
-                });
-
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transaccion.Transaccion", b =>
-                {
-                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", "Cuenta")
-                        .WithMany()
+                    b.HasOne("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", "Cuenta")
+                        .WithMany("Categorias")
                         .HasForeignKey("CuentaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -205,28 +189,63 @@ namespace WSfinanceperson.Infrastructure.Migrations
                     b.Navigation("Cuenta");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Transferencias.Transferencia", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", b =>
                 {
-                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", "cuentadestino")
+                    b.HasOne("WSfinanceperson.Infrastructure.EF.ReadModel.PersonaReadModel", "Persona")
+                        .WithMany("Cuentas")
+                        .HasForeignKey("PersonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.TransaccionReadModel", b =>
+                {
+                    b.HasOne("WSfinanceperson.Infrastructure.EF.ReadModel.CategoriaReadModel", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", "Cuenta")
+                        .WithMany()
+                        .HasForeignKey("CuentaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Cuenta");
+                });
+
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.TransferenciaReadModel", b =>
+                {
+                    b.HasOne("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", "CuentaDestino")
                         .WithMany()
                         .HasForeignKey("CuentaDestinoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WSfinanceperson.Domain.Models.Cuentas.Cuenta", "cuentaorigen")
+                    b.HasOne("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", "CuentaOrigen")
                         .WithMany()
                         .HasForeignKey("CuentaOrigenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("cuentadestino");
+                    b.Navigation("CuentaDestino");
 
-                    b.Navigation("cuentaorigen");
+                    b.Navigation("CuentaOrigen");
                 });
 
-            modelBuilder.Entity("WSfinanceperson.Domain.Models.Cuentas.Cuenta", b =>
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.CuentaReadModel", b =>
                 {
-                    b.Navigation("_categoria");
+                    b.Navigation("Categorias");
+                });
+
+            modelBuilder.Entity("WSfinanceperson.Infrastructure.EF.ReadModel.PersonaReadModel", b =>
+                {
+                    b.Navigation("Cuentas");
                 });
 #pragma warning restore 612, 618
         }

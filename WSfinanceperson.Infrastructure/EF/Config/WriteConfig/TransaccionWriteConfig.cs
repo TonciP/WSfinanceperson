@@ -31,7 +31,7 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
                 .HasColumnName("monto");
 
             builder.Property(x => x.Descripcion).HasColumnName("descripcion");
-            builder.HasOne(x => x.Cuenta);
+            //builder.HasOne(x => x.Cuenta);
             //builder.HasOne(typeof(Cuenta), "_cuenta");
             //builder.Property(x => x.Tipo).HasColumnName("tipo");
             var tipoConverter = new ValueConverter<Movimiento, string>(
@@ -56,22 +56,22 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
                  .HasMaxLength(20)
                  .IsRequired();
 
-            builder.HasOne(x => x.Categoria);
+            //builder.HasOne(x => x.Categoria);
             //builder.HasOne(typeof(Categoria), "_categoria");
 
-            var fechaTransConverter = new ValueConverter<FechaTransaccion, DateTime>(
-                fechaTransValue => fechaTransValue.Value,
-                fechatrans => new FechaTransaccion(fechatrans)
+            var fechaTransaccionConverter = new ValueConverter<FechaTransaccion, DateTime>(
+                fechaTransaccionValue => fechaTransaccionValue.Value,
+                fechaTransaccion => new FechaTransaccion(fechaTransaccion)
             );
 
             builder.Property(x => x.FechaRegistro)
+                .HasConversion(fechaTransaccionConverter)
                 .HasColumnName("fechaRegistro")
-                .HasConversion(fechaTransConverter)
                 .IsRequired();
 
             builder.Ignore("_domainEvents");
             builder.Ignore(builder => builder.DomainEvents);
-            builder.Ignore(x => x.Categoria);
+            //builder.Ignore(x => x.Categoria);
             //builder.Ignore(x => x.Cuenta);
         }
     }

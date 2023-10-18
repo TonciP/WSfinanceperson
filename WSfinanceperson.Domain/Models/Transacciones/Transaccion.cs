@@ -20,30 +20,12 @@ namespace WSfinanceperson.Domain.Models.Transaccion
         public MontoTransferencia Monto { get; private set; }
         public string Descripcion { get; private set; }
         public Guid CuentaId { get; private set; }
-        private readonly Cuenta _cuenta;
-
-        public Cuenta Cuenta
-        {
-            get
-            {
-                return _cuenta;
-            }
-        }
         public Movimiento Tipo { get; private set; }
         public EstadoTransaccion Estado { get; private set; }
         public Guid CategoriaId { get; private set; }
         //public DateTime FechaRegistro { get; private set; }
         public FechaTransaccion FechaRegistro { get; private set; }
 
-        private readonly Categoria _categoria;
-
-        public Categoria Categoria
-        {
-            get
-            {
-                return _categoria;
-            }
-        }
         public Transaccion() { }
         public Transaccion(Movimiento tipo)
         {

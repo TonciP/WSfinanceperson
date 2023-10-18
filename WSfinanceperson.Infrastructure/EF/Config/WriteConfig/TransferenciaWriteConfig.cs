@@ -16,34 +16,33 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 {
     public class TransferenciaWriteConfig : IEntityTypeConfiguration<Transferencia>
     {
-        //public Guid Id { get; private set; }
-        //public DateTime FechaTransaferencia { get; private set; }
-        //public Guid CuentaOrigente { get; private set; }
-        //public Guid CuentaDestino { get; private set; }
-        //public decimal Monto { get; private set; }
-        //public Movimiento Tipo { get; private set; }
-        //public EstadoTransaccion Estado { get; private set; }
         public void Configure(EntityTypeBuilder<Transferencia> builder)
         {
             builder.ToTable("Transferencia");
             builder.HasKey(x => x.Id);
 
+            var fechaTransaccionConverter = new ValueConverter<FechaTransaccion, DateTime>(
+                fechaTransaccionValue => fechaTransaccionValue.Value,
+                fechaTransaccion => new FechaTransaccion(fechaTransaccion)
+            );
+
             builder.Property(x => x.FechaTransaferencia)
+                .HasConversion(fechaTransaccionConverter)
                 .HasColumnName("fechaTransferencia")
                 .IsRequired();
 
             //builder.HasOne(x => x.CuentaOrigen);
-            builder.HasOne(typeof(Cuenta), "cuentaorigen");
+            //builder.HasOne(typeof(Cuenta), "cuentaorigen");
             //builder.HasOne(x => x.CuentaDestino);
-            builder.HasOne(typeof(Cuenta), "cuentadestino");
+            //builder.HasOne(typeof(Cuenta), "cuentadestino");
 
-            var montoConverter = new ValueConverter<MontoTransferencia, decimal>(
-                               montoValue => montoValue.Value,
-                                              monto => new MontoTransferencia(monto)
-                                                         );
+            var montoTransferenciaConverter = new ValueConverter<MontoTransferencia, decimal>(
+                montoTransferenciaValue => montoTransferenciaValue.Value,
+                montoTransferencia => new MontoTransferencia(montoTransferencia)
+            );
 
             builder.Property(x => x.Monto)
-                .HasConversion(montoConverter)
+                .HasConversion(montoTransferenciaConverter)
                 .HasColumnName("monto");
 
             var tipoConverter = new ValueConverter<Movimiento, string>(
@@ -70,8 +69,8 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 
             builder.Ignore("_domainEvents");
             builder.Ignore(builder => builder.DomainEvents);
-            builder.Ignore(x => x.CuentaOrigen);
-            builder.Ignore(x => x.CuentaDestino);
+            //builder.Ignore(x => x.CuentaOrigen);
+            //builder.Ignore(x => x.CuentaDestino);
             //builder.Ignore(x => x.CuentaDestinoId);
             //builder.Ignore(x => x.CuentaOrigenId);
 
