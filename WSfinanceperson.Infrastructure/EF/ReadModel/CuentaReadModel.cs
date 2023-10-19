@@ -22,8 +22,10 @@ namespace WSfinanceperson.Infrastructure.EF.ReadModel
         [Required]
         [Column("saldoInicial")]
         public decimal SaldoInicial { get;  set; }
-        [Column("PersonaId")]
-        [ForeignKey("PersonaId")]
+        //[Column("PersonaId")]
+        //[ForeignKey("PersonaId")]
+        [Column("personaId")]
+        [ForeignKey("personaId")]
         public Guid PersonaId { get;  set; }
         public PersonaReadModel Persona { get; set; }
 

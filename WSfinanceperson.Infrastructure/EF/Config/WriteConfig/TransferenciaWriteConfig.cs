@@ -31,6 +31,12 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
                 .HasColumnName("fechaTransferencia")
                 .IsRequired();
 
+            builder.Property(x => x.CuentaOrigenId).HasColumnName("cuentaOrigenId").IsRequired();
+            builder.HasOne<Cuenta>().WithMany().HasForeignKey("cuentaOrigenId");
+
+            builder.Property(x => x.CuentaDestinoId).HasColumnName("cuentaDestinoId").IsRequired();
+            builder.HasOne<Cuenta>().WithMany().HasForeignKey("cuentaDestinoId");
+
             //builder.HasOne(x => x.CuentaOrigen);
             //builder.HasOne(typeof(Cuenta), "cuentaorigen");
             //builder.HasOne(x => x.CuentaDestino);

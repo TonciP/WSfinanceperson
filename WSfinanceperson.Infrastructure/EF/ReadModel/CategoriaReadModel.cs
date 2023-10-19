@@ -14,8 +14,10 @@ namespace WSfinanceperson.Infrastructure.EF.ReadModel
         [Key]
         public Guid Id { get; set; }
         [Required]
-        [Column("CuentaId")]
-        [ForeignKey("CuentaId")]
+        //[Column("CuentaId")]
+        //[ForeignKey("CuentaId")]
+        [Column("cuentaId")]
+        [ForeignKey("cuentaId")]
         public Guid CuentaId { get; set; }
         public CuentaReadModel Cuenta { get; set; }
         [Required]

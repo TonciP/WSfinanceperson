@@ -17,11 +17,13 @@ namespace WSfinanceperson.Infrastructure.EF.ReadModel
         [Key]
         public Guid Id { get; set; }
         [Required]
-        [Column("CuentaOrigenId")]
+        //[Column("CuentaOrigenId")]
+        [Column("cuentaOrigenId")]
         public Guid CuentaOrigenId { get; set; }
         public CuentaReadModel CuentaOrigen { get; set; }
         [Required]
-        [Column("CuentaDestinoId")]
+        //[Column("CuentaDestinoId")]
+        [Column("cuentaDestinoId")]
         public Guid CuentaDestinoId { get; set; }
         public CuentaReadModel CuentaDestino { get; set; }
 

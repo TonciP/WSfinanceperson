@@ -22,11 +22,13 @@ namespace WSfinanceperson.Infrastructure.EF.ReadModel
         [Column("descripcion")]
         public string Descripcion { get; set; }
         [Required]
-        [Column("CuentaId")]
+        //[Column("CuentaId")]
+        [Column("cuentaId")]
         public Guid CuentaId { get; set; }
         public CuentaReadModel Cuenta { get; set; }
         [Required]
-        [Column("CategoriaId")]
+        //[Column("CategoriaId")]
+        [Column("categoriaId")]
         public Guid CategoriaId { get; set; }
         public CategoriaReadModel Categoria { get; set; }
 

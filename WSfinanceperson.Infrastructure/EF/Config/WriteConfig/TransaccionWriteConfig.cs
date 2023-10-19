@@ -31,6 +31,11 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
                 .HasColumnName("monto");
 
             builder.Property(x => x.Descripcion).HasColumnName("descripcion");
+
+            
+            builder.Property(x => x.CuentaId).HasColumnName("cuentaId").IsRequired();
+            builder.HasOne<Cuenta>().WithMany().HasForeignKey("CuentaId");
+
             //builder.HasOne(x => x.Cuenta);
             //builder.HasOne(typeof(Cuenta), "_cuenta");
             //builder.Property(x => x.Tipo).HasColumnName("tipo");
@@ -58,6 +63,8 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
 
             //builder.HasOne(x => x.Categoria);
             //builder.HasOne(typeof(Categoria), "_categoria");
+            builder.Property(x => x.CategoriaId).HasColumnName("categoriaId").IsRequired();
+            builder.HasOne<Categoria>().WithMany().HasForeignKey("CategoriaId");
 
             var fechaTransaccionConverter = new ValueConverter<FechaTransaccion, DateTime>(
                 fechaTransaccionValue => fechaTransaccionValue.Value,
