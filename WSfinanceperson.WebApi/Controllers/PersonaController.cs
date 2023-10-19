@@ -28,11 +28,11 @@ namespace WSfinanceperson.WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromQuery] string? correo = "", [FromQuery] string? contrasena = "")
+        public async Task<IActionResult> Login([FromBody] LoginUserDto command)
         {
-            var result = await _mediator.Send(new LoginUserDto(correo, contrasena));
+            var result = await _mediator.Send(command);
             if (result.Success)
             {
                 //return Ok(result.Value.ToString());
