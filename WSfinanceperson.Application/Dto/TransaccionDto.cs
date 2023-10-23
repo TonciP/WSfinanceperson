@@ -1,5 +1,4 @@
-﻿using Inventario.Domain.Models.Transacciones;
-using WSfinanceperson.Domain.Models.Transaccion;
+﻿using WSfinanceperson.Domain.Models.Transaccion;
 
 namespace WSfinanceperson.Application.Dto
 {

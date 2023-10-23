@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventario.Domain.Models.Transacciones
+namespace WSfinanceperson.Domain.Models.Transacciones
 {
     public enum EstadoTransaccion
     {

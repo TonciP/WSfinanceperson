@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WSfinanceperson.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class @int : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace WSfinanceperson.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    correo = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     contrasena = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -131,6 +131,12 @@ namespace WSfinanceperson.Infrastructure.Migrations
                 name: "IX_Cuenta_personaId",
                 table: "Cuenta",
                 column: "personaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Persona_correo",
+                table: "Persona",
+                column: "correo",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transaccion_categoriaId",

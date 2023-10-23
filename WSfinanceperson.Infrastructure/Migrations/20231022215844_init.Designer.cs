@@ -12,8 +12,8 @@ using WSfinanceperson.Infrastructure.EF.Contexts;
 namespace WSfinanceperson.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20231017015932_int")]
-    partial class @int
+    [Migration("20231022215844_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,10 +86,13 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<string>("Correo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("correo");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Correo")
+                        .IsUnique();
 
                     b.ToTable("Persona");
                 });

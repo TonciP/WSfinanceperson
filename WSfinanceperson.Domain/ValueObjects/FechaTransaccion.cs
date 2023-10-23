@@ -13,7 +13,7 @@ namespace WSfinanceperson.Domain.ValueObjects
 
         public FechaTransaccion(DateTime value)
         {
-            if (value < DateTime.Now)
+            if (!value.ToString("MM/dd/yyyy H:mm").Equals(DateTime.Now.ToString("MM/dd/yyyy H:mm")))
             {
                 throw new BussinessRuleValidationException("La fecha no puede ser menor a la fecha actual");
             }

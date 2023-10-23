@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ShareKernel.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,24 @@ namespace WSfinanceperson.Application.UseCases.Command.Personas.CrearRegistro
         }
         public async Task<Guid> Handle(CrearRegistroCommand request, CancellationToken cancellationToken)
         {
-            //string hash = hashSecutiry(request.Contrasena);
-            ////Devolvemos la cadena con el hash en mayúsculas para que quede más chuli :)
+            try
+            {
+                string hash = hashSecutiry(request.Contrasena);
+                ////Devolvemos la cadena con el hash en mayúsculas para que quede más chuli :)
 
-            //var persona = _personaFactory.Create(request.Correo, hash);
-            var persona = _personaFactory.Create(request.Correo, request.Contrasena);
-            await _personaRepository.CreateAsync(persona);
-            await _unitOfWork.Commit();
+                var persona = _personaFactory.Create(request.Correo, hash);
+                //var persona = _personaFactory.Create(request.Correo, request.Contrasena);
+                await _personaRepository.CreateAsync(persona);
+                await _unitOfWork.Commit();
 
-            return persona.Id;
+                return persona.Id;
+            }
+            catch (Exception ex)
+            {
+
+                throw new BussinessRuleValidationException("No se logro crear a Persona, puede que se tenga un registro con ese correo");
+            }
+            return Guid.NewGuid();
         }
 
         private string hashSecutiry(string contrasena)

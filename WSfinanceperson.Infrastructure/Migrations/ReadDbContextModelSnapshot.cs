@@ -30,7 +30,7 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<Guid>("CuentaId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CuentaId");
+                        .HasColumnName("cuentaId");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -57,7 +57,7 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<Guid>("PersonaId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("PersonaId");
+                        .HasColumnName("personaId");
 
                     b.Property<decimal>("SaldoInicial")
                         .HasColumnType("decimal(18,2)")
@@ -83,10 +83,13 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<string>("Correo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(450)")
                         .HasColumnName("correo");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Correo")
+                        .IsUnique();
 
                     b.ToTable("Persona");
                 });
@@ -99,11 +102,11 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CategoriaId");
+                        .HasColumnName("categoriaId");
 
                     b.Property<Guid>("CuentaId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CuentaId");
+                        .HasColumnName("cuentaId");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -145,11 +148,11 @@ namespace WSfinanceperson.Infrastructure.Migrations
 
                     b.Property<Guid>("CuentaDestinoId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CuentaDestinoId");
+                        .HasColumnName("cuentaDestinoId");
 
                     b.Property<Guid>("CuentaOrigenId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CuentaOrigenId");
+                        .HasColumnName("cuentaOrigenId");
 
                     b.Property<string>("Estado")
                         .IsRequired()

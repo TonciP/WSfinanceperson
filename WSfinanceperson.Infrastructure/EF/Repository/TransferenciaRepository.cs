@@ -23,14 +23,22 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
             await _transferencia.AddAsync(obj);
         }
 
-        public Task<Transferencia> FindByIdAsync(Guid id)
+        public async Task<Transferencia> FindByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var obj = await _transferencia.FindAsync(id);
+            return obj;
         }
 
         public Task UpdateAsync(Transferencia transaccion)
         {
             _transferencia.Update(transaccion);
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteAsync(Transferencia obj)
+        {
+            _transferencia.Remove(obj);
+
             return Task.CompletedTask;
         }
     }

@@ -11,6 +11,7 @@ namespace WSfinanceperson.Domain.Repositories
     public interface ICategoriaRepository
         : IRepository<Categoria, Guid>
     {
+        Task DeleteAsync(Categoria categoria);
         Task UpdateAsync(Categoria obj);
     }
 }

@@ -7,7 +7,7 @@ using WSfinanceperson.Application.Services;
 using WSfinanceperson.Infrastructure;
 using WSfinanceperson.Infrastructure.Services;
 
-namespace Inventario.WebApi
+namespace WSfinanceperson.WebApi
 {
     public class Startup
     {

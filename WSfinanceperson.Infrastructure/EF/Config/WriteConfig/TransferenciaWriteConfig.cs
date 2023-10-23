@@ -1,4 +1,4 @@
-﻿using Inventario.Domain.Models.Transacciones;
+﻿using WSfinanceperson.Domain.Models.Transacciones;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -32,10 +32,10 @@ namespace WSfinanceperson.Infrastructure.EF.Config.WriteConfig
                 .IsRequired();
 
             builder.Property(x => x.CuentaOrigenId).HasColumnName("cuentaOrigenId").IsRequired();
-            builder.HasOne<Cuenta>().WithMany().HasForeignKey("cuentaOrigenId");
+            builder.HasOne<Cuenta>().WithMany().HasForeignKey("CuentaOrigenId");
 
             builder.Property(x => x.CuentaDestinoId).HasColumnName("cuentaDestinoId").IsRequired();
-            builder.HasOne<Cuenta>().WithMany().HasForeignKey("cuentaDestinoId");
+            builder.HasOne<Cuenta>().WithMany().HasForeignKey("CuentaDestinoId");
 
             //builder.HasOne(x => x.CuentaOrigen);
             //builder.HasOne(typeof(Cuenta), "cuentaorigen");

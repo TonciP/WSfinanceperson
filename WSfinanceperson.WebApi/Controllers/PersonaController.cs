@@ -9,6 +9,7 @@ using System.Text;
 using WSfinanceperson.Application.Dto;
 using WSfinanceperson.Application.UseCases.Auth.Personas;
 using WSfinanceperson.Application.UseCases.Command.Categorias.CrearCategoria;
+using WSfinanceperson.Application.UseCases.Command.Personas.ActualizarPersona;
 using WSfinanceperson.Application.UseCases.Command.Personas.CrearRegistro;
 
 namespace WSfinanceperson.WebApi.Controllers
@@ -19,8 +20,6 @@ namespace WSfinanceperson.WebApi.Controllers
     public class PersonaController : ControllerBase
     {
         private readonly IMediator _mediator;
-        //public static string tipo { get { return "PersonaController"; } }
-        //public static string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public PersonaController(IMediator mediator)
         {
@@ -56,25 +55,13 @@ namespace WSfinanceperson.WebApi.Controllers
             return Ok(result);
         }
 
-
-        //private string GenerateToken(string username)
-        //{
-        //    var claims = new Claim[]
-        //   {
-        //    new Claim(ClaimTypes.Name, username),
-        //                new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
-        //    new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds().ToString()),
-        //            };
-
-        //            var token = new JwtSecurityToken(
-        //                new JwtHeader(
-        //                    new SigningCredentials(
-        //                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
-        //                        SecurityAlgorithms.HmacSha256)
-        //                        ),
-        //                new JwtPayload(claims));
-        //            return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> ActualizarRegistro([FromBody] ActualizarPersonaCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

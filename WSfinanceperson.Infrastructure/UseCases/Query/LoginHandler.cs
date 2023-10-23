@@ -15,12 +15,12 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query
 {
     internal class LoginHandler : IRequestHandler<LoginUserDto, Result<string>>
     {
-        private readonly DbSet<PersonaReadModel> persona;
+        private readonly DbSet<PersonaReadModel> _persona;
         private string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public LoginHandler(ReadDbContext dbContext)
         {
-            persona = dbContext.Persona;
+            _persona = dbContext.Persona;
         }
 
         public async Task<Result<string>> Handle(LoginUserDto request, CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query
 
             string hash = hashSecutiry(request.Contrasena);
 
-            var result = await persona.SingleOrDefaultAsync(x => x.Correo == request.Correo && x.Contrasena == hash);
+            var result = await _persona.SingleOrDefaultAsync(x => x.Correo == request.Correo && x.Contrasena == hash);
 
             
             if (result != null) 

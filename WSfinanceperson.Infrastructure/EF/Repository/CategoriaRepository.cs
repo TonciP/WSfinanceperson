@@ -35,7 +35,15 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
 
         public Task UpdateAsync(Categoria obj)
         {
-            throw new NotImplementedException();
+            _categorias.Update(obj);
+            return Task.CompletedTask;
+        }
+
+        public  Task DeleteAsync(Categoria obj)
+        {
+            _categorias.Remove(obj);
+
+            return Task.CompletedTask;
         }
     }
 }

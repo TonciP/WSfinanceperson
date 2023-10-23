@@ -20,5 +20,10 @@ namespace WSfinanceperson.Domain.Models.Categorias
             Nombre = nombre;
         }
 
+        public void Actualizar(string nombre)
+        {
+            Nombre = nombre;
+        }
+
     }
 }

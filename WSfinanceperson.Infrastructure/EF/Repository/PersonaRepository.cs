@@ -33,7 +33,8 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
 
         public Task UpdateAsync(Persona obj)
         {
-            throw new NotImplementedException();
+            _persona.Update(obj);
+            return Task.CompletedTask;
         }
     }
 }

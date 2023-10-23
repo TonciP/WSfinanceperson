@@ -1,4 +1,4 @@
-﻿using Inventario.Domain.Models.Transacciones;
+﻿using WSfinanceperson.Domain.Models.Transacciones;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

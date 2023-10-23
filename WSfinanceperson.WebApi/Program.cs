@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 
-namespace Inventario.WebApi
+namespace WSfinanceperson.WebApi
 {
     public static class Program
     {

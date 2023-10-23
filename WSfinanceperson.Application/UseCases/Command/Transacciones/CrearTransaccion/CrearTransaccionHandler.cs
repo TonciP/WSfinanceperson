@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WSfinanceperson.Application.UseCases.Command.Personas.CrearRegistro;
 using WSfinanceperson.Domain.Factories;
+using WSfinanceperson.Domain.Models.Transaccion;
 using WSfinanceperson.Domain.Repositories;
 
 namespace WSfinanceperson.Application.UseCases.Command.Transacciones.CrearTransaccion
@@ -40,12 +41,18 @@ namespace WSfinanceperson.Application.UseCases.Command.Transacciones.CrearTransa
             if (saldoCuenta == 0 || saldoCuenta < request.Monto)
                 throw new Exception("La cuenta no tiene suficiente fondo");
 
-            var persona = _transaccionFactory.Create(request.Monto, request.Descripcion, request.CuentaId, Domain.Models.Transaccion.Movimiento.Egreso, Inventario.Domain.Models.Transacciones.EstadoTransaccion.Registrado, request.CateogriaId);
+            Transaccion transaccion = request.Tipo == Dto.Movimiento.Egreso ?
+                _transaccionFactory.CrearTransaccionEgreso() :
+                _transaccionFactory.CrearTransaccionIngreso();
 
-            await _transaccionRepository.CreateAsync(persona);
+            transaccion.agregarDatos(request.Monto, request.Descripcion, request.CuentaId, request.CategoriaId);
+
+            //var transaccion = _transaccionFactory.Create(request.Monto, request.Descripcion, request.CuentaId, transaccion.Tipo, Wsfinanceperson.Domain.Models.Transacciones.EstadoTransaccion.Registrado, request.CategoriaId);
+
+            await _transaccionRepository.CreateAsync(transaccion);
             await _unitOfWork.Commit();
-            
-            return persona.Id;
+
+            return transaccion.Id;
         }
     }
 }

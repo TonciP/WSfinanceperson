@@ -9,13 +9,13 @@ namespace WSfinanceperson.Application.UseCases.Command.Cuentas.CrearCuenta
 {
     public class CrearCuentaCommand : IRequest<Guid>
     {
-        public string NombreCuenta { get; set; }    
+        public string Nombre { get; set; }    
         public decimal saldoInicial { get; set; }
         public Guid PersonaId { get; set; }
 
-        public CrearCuentaCommand(string nombreCuenta, decimal saldoInicial, Guid personaId)
+        public CrearCuentaCommand(string nombre, decimal saldoInicial, Guid personaId)
         {
-            NombreCuenta = nombreCuenta;
+            Nombre = nombre;
             this.saldoInicial = saldoInicial;
             PersonaId = personaId;
         }

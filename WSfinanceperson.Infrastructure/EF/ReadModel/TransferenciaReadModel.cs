@@ -1,4 +1,4 @@
-﻿using Inventario.Domain.Models.Transacciones;
+﻿using WSfinanceperson.Domain.Models.Transacciones;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

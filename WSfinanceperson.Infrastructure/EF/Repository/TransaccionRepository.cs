@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Personas;
 using WSfinanceperson.Domain.Models.Transaccion;
 using WSfinanceperson.Domain.Repositories;
@@ -32,6 +33,13 @@ namespace WSfinanceperson.Infrastructure.EF.Repository
         public async Task UpdateAsync(Transaccion transaccion)
         {
             await Task.FromResult(_transaccion.Update(transaccion));
+        }
+
+        public Task DeleteAsync(Transaccion obj)
+        {
+            _transaccion.Remove(obj);
+
+            return Task.CompletedTask;
         }
     }
 }

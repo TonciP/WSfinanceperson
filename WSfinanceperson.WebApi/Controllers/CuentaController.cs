@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using WSfinanceperson.Application.UseCases.Command.Cuentas.ActualizarCuenta;
 using WSfinanceperson.Application.UseCases.Command.Cuentas.CrearCuenta;
+using WSfinanceperson.Application.UseCases.Command.Cuentas.EliminarCuenta;
 using WSfinanceperson.Application.UseCases.Query.Cuentas.GetCuentaBy;
 using WSfinanceperson.Application.UseCases.Query.Cuentas.GetCuentasByPersonaId;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -13,12 +14,12 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace WSfinanceperson.WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize]
     public class CuentaController : ControllerBase
     {
         private readonly IMediator _mediator;
         public static string tipo { get { return "CuentaController"; } }
-        public static string secret { get { return "WSFINANCE3T3N6PSJKWM"; } }
 
         public CuentaController(IMediator mediator)
         {
@@ -32,13 +33,20 @@ namespace WSfinanceperson.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> EliminarCuenta([FromBody] EliminarCuentaCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [Route("CrearCuentaPersona")]
         [HttpPost]
         public async Task<IActionResult> CrearCuentaPersona([FromBody] CrearCuentaCommand command)
         {
             var result = await _mediator.Send(new CrearCuentaCommand
             {
-                NombreCuenta = command.NombreCuenta,
+                Nombre = command.Nombre,
                 saldoInicial = command.saldoInicial,
                 PersonaId = new Guid(GetName())
             });
@@ -75,6 +83,7 @@ namespace WSfinanceperson.WebApi.Controllers
             return Ok(result);
         }
 
+        [NonAction]
         protected string GetName()
         {
             string token = Request.Headers["Authorization"];

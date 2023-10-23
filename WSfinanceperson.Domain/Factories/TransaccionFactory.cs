@@ -1,10 +1,10 @@
-﻿using Inventario.Domain.Models.Transacciones;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WSfinanceperson.Domain.Models.Transaccion;
+using WSfinanceperson.Domain.Models.Transacciones;
 
 namespace WSfinanceperson.Domain.Factories
 {

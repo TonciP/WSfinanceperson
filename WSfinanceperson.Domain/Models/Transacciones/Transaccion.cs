@@ -1,14 +1,15 @@
-﻿using Inventario.Domain.Models.Transacciones;
-using ShareKernel.Core;
+﻿using ShareKernel.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using WSfinanceperson.Domain.Events;
 using WSfinanceperson.Domain.Models.Categorias;
 using WSfinanceperson.Domain.Models.Cuentas;
 using WSfinanceperson.Domain.Models.Personas;
+using WSfinanceperson.Domain.Models.Transacciones;
 using WSfinanceperson.Domain.ValueObjects;
 
 namespace WSfinanceperson.Domain.Models.Transaccion
@@ -29,12 +30,8 @@ namespace WSfinanceperson.Domain.Models.Transaccion
         public Transaccion() { }
         public Transaccion(Movimiento tipo)
         {
-            Id = Guid.NewGuid();
-            FechaRegistro = DateTime.Now;
             Estado = EstadoTransaccion.Registrado;
             Tipo = tipo;
-            //_detalle = new List<DetalleTransaccion>();
-            //AddDomainEvent(new TransaccionCreada(this.Id, this.Monto, DateTime.Now));
         }
 
         public Transaccion(decimal monto, string descripcion, Guid cuentaId, Movimiento tipo, Guid categoriaId)
@@ -45,6 +42,7 @@ namespace WSfinanceperson.Domain.Models.Transaccion
             CuentaId = cuentaId;
             Tipo = tipo;
             CategoriaId = categoriaId;
+            FechaRegistro = DateTime.Now;
         }
         public Transaccion(decimal monto, string descripcion, Guid cuentaId, Movimiento tipo, EstadoTransaccion estadoTransaccion, Guid categoriaId)
         {
@@ -55,6 +53,18 @@ namespace WSfinanceperson.Domain.Models.Transaccion
             Tipo = tipo;
             Estado = estadoTransaccion;
             CategoriaId = categoriaId;
+            FechaRegistro = DateTime.Now;
+            AddDomainEvent(new TransaccionCreada(cuentaId, monto, DateTime.Now));
+        }
+
+        public void agregarDatos(decimal monto, string descripcion, Guid cuentaId, Guid categoriaId)
+        {
+            Id = Guid.NewGuid();
+            Monto = monto;
+            Descripcion = descripcion;
+            CuentaId = cuentaId;
+            CategoriaId = categoriaId;
+            FechaRegistro = DateTime.Now;
             AddDomainEvent(new TransaccionCreada(cuentaId, monto, DateTime.Now));
         }
     }

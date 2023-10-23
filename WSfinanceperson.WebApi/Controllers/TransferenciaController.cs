@@ -1,11 +1,15 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WSfinanceperson.Application.UseCases.Command.Transacciones.CrearTransaccion;
-using WSfinanceperson.Application.UseCases.Command.Transferencia.CrearTransferencia;
+using WSfinanceperson.Application.UseCases.Command.Transferencias.CrearTransferencia;
+using WSfinanceperson.Application.UseCases.Command.Transferencias.EliminarTransferencia;
 
 namespace WSfinanceperson.WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class TransferenciaController : ControllerBase
     {
 
@@ -17,6 +21,13 @@ namespace WSfinanceperson.WebApi.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> CrearTransferencia([FromBody] CrearTransferenciaCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> EliminarTransferencia([FromBody] EliminarTransferenciaCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
