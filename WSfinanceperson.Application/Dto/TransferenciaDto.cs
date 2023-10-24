@@ -11,12 +11,13 @@ namespace WSfinanceperson.Application.Dto
 {
     public class TransferenciaDto
     {
-        public DateTime FechaTransaferencia { get;  set; }
-        //public CuentaDto CuentaOrigen;
-        public Guid CuentaOrigenId;
+        public Guid Id { get;  set; }
+        public DateTime FechaTransferencia { get;  set; }
+        public CuentaDto CuentaOrigen { get; set; }
+        public Guid CuentaOrigenId { get; set; }
 
-        //public CuentaDto CuentaDestino;
-        public Guid CuentaDestinoId;
+        public CuentaDto CuentaDestino { get; set; }
+        public Guid CuentaDestinoId { get; set; }
         public decimal Monto { get;  set; }
         public string Tipo { get;  set; }
         public string Estado { get;  set; }

@@ -11,7 +11,7 @@ namespace WSfinanceperson.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ConsultasController : ControllerBase
     {
         private readonly IMediator _mediator;

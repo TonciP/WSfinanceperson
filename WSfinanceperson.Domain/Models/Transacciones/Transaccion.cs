@@ -34,16 +34,16 @@ namespace WSfinanceperson.Domain.Models.Transaccion
             Tipo = tipo;
         }
 
-        public Transaccion(decimal monto, string descripcion, Guid cuentaId, Movimiento tipo, Guid categoriaId)
-        {
-            Id = Guid.NewGuid();
-            Monto = monto;
-            Descripcion = descripcion;
-            CuentaId = cuentaId;
-            Tipo = tipo;
-            CategoriaId = categoriaId;
-            FechaRegistro = DateTime.Now;
-        }
+        //public Transaccion(decimal monto, string descripcion, Guid cuentaId, Movimiento tipo, Guid categoriaId)
+        //{
+        //    Id = Guid.NewGuid();
+        //    Monto = monto;
+        //    Descripcion = descripcion;
+        //    CuentaId = cuentaId;
+        //    Tipo = tipo;
+        //    CategoriaId = categoriaId;
+        //    FechaRegistro = DateTime.Now;
+        //}
         public Transaccion(decimal monto, string descripcion, Guid cuentaId, Movimiento tipo, EstadoTransaccion estadoTransaccion, Guid categoriaId)
         {
             Id = Guid.NewGuid();
@@ -66,6 +66,11 @@ namespace WSfinanceperson.Domain.Models.Transaccion
             CategoriaId = categoriaId;
             FechaRegistro = DateTime.Now;
             AddDomainEvent(new TransaccionCreada(cuentaId, monto, DateTime.Now));
+        }
+
+        public void eliminarTransaccion()
+        {
+            AddDomainEvent(new TransaccionEliminada(this.CuentaId, this.Monto, DateTime.Now));
         }
     }
 }

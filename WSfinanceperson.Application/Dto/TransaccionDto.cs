@@ -4,6 +4,7 @@ namespace WSfinanceperson.Application.Dto
 {
     public class TransaccionDto
     {
+        public Guid Id { get; set; }
         public decimal Monto { get;  set; }
         public string Descripcion { get;  set; }
         public CuentaDto Cuenta { get; set; }

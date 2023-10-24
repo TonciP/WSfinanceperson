@@ -12,21 +12,28 @@ namespace WSfinanceperson.Application.UseCases.Command.Transferencias.EliminarTr
     public class EliminarTransferenciaHandler : IRequestHandler<EliminarTransferenciaCommand, Guid>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ITransferenciaFactory _transaccionFactory;
-        private readonly ITransferenciaRepository _transaccionRepository;
+        private readonly ITransferenciaFactory _transferenciaFactory;
+        private readonly ITransferenciaRepository _transferenciaRepository;
         private readonly ICuentaRepository _cuentaRepository;
 
-        public EliminarTransferenciaHandler(IUnitOfWork unitOfWork, ITransferenciaFactory transaccionFactory, ITransferenciaRepository transaccionRepository, ICuentaRepository cuentaRepository)
+        public EliminarTransferenciaHandler(IUnitOfWork unitOfWork, ITransferenciaFactory transferenciaFactory, ITransferenciaRepository transferenciaRepository, ICuentaRepository cuentaRepository)
         {
             _unitOfWork = unitOfWork;
-            _transaccionFactory = transaccionFactory;
-            _transaccionRepository = transaccionRepository;
+            _transferenciaFactory = transferenciaFactory;
+            _transferenciaRepository = transferenciaRepository;
             _cuentaRepository = cuentaRepository;
         }
 
-        public Task<Guid> Handle(EliminarTransferenciaCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(EliminarTransferenciaCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var transferencia = await _transferenciaRepository.FindByIdAsync(request.Id);
+            transferencia.eliminarTransferencia();
+
+            await _transferenciaRepository.DeleteAsync(transferencia);
+
+            await _unitOfWork.Commit();
+
+            return transferencia.Id;
         }
     }
 }

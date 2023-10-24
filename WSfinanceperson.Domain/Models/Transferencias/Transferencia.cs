@@ -67,5 +67,9 @@ namespace WSfinanceperson.Domain.Models.Transferencias
             Monto = monto;
             AddDomainEvent(new TransferenciaCreada(cuentaOrigen, cuentaDestino, monto, DateTime.Now));
         }
+        public void eliminarTransferencia()
+        {
+            AddDomainEvent(new TransferenciaEliminada(this.CuentaOrigenId, this.CuentaDestinoId, this.Monto, DateTime.Now));
+        }
     }
 }

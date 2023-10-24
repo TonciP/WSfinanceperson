@@ -10,7 +10,7 @@ namespace WSfinanceperson.Application.UseCases.Query.Transacciones.Historial
 {
     public class HistorialTransferenciaQuery: IRequest<ICollection<TransferenciaDto>>
     {
-        public DateTime? FechaTransaferencia { get; set; }
+        public DateTime? FechaTransferencia { get; set; }
 
         public Guid? CuentaOrigenId { get; set; }
 

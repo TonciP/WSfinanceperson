@@ -11,5 +11,6 @@ namespace WSfinanceperson.Domain.Repositories
     public interface IPersonaRepository : IRepository<Persona, Guid>
     {
         Task UpdateAsync(Persona obj);
+
     }
 }

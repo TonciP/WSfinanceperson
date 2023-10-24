@@ -1,9 +1,5 @@
 ﻿using ShareKernel.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using WSfinanceperson.Domain.Models.Transaccion;
 
 namespace WSfinanceperson.Domain.Repositories
@@ -11,5 +7,6 @@ namespace WSfinanceperson.Domain.Repositories
     public interface ITransaccionRepository : IRepository<Transaccion, Guid>
     {
         Task UpdateAsync(Transaccion transaccion);
+        Task DeleteAsync(Transaccion categoria);
     }
 }

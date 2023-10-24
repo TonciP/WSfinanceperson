@@ -24,9 +24,16 @@ namespace WSfinanceperson.Application.UseCases.Command.Transacciones.EliminarTra
             _cuentaRepository = cuentaRepository;
         }
 
-        public Task<Guid> Handle(EliminarTransaccionCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(EliminarTransaccionCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var transaccion =  _transaccionRepository.FindByIdAsync(request.Id).Result;
+            transaccion.eliminarTransaccion();
+
+            await _transaccionRepository.DeleteAsync(transaccion);
+
+            await _unitOfWork.Commit();
+
+            return transaccion.Id;
         }
     }
 }

@@ -28,16 +28,14 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query.Transferencias
         {
             var transaccionList = await _transferencia
                             .AsNoTracking()
+                            .Include(x => x.CuentaOrigen)
+                            .Include(x => x.CuentaDestino)
                             .Where(
-                x => x.CuentaOrigenId.ToString().Contains(request.CuentaOrigenId.ToString()) ||
-                x.CuentaDestinoId.ToString().Contains(request.CuentaDestinoId.ToString()) ||
-                x.FechaTransferencia.ToString().Contains(request.FechaTransaferencia.ToString())
+                x => x.CuentaOrigenId == request.CuentaOrigenId ||
+                x.CuentaDestinoId == request.CuentaDestinoId ||
+                x.FechaTransferencia == request.FechaTransferencia
                 ).ToListAsync();
-            //.Include(x => x.Categoria).ToListAsync();
-            //.Where(x => 
-            //x.CuentaId.ToString().Contains(request.CuentaId.ToString())  || 
-            //x.FechaRegistro == request.FechaRegistro || x.CategoriaId.ToString().Contains(request.CategoriaId.ToString()))
-            //.ToListAsync();
+
 
             var result = new List<TransferenciaDto>();
 
@@ -45,21 +43,23 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query.Transferencias
             {
                 var transaccion = new TransferenciaDto
                 {
+                    Id = t.Id,
                     Monto = t.Monto,
                     CuentaDestinoId = t.CuentaDestinoId,
                     CuentaOrigenId = t.CuentaOrigenId,
-                    //CuentaOrigen = new CuentaDto
-                    //{
-                    //    Id = t.CuentaOrigen.Id,
-                    //    Nombre = t.CuentaOrigen.Nombre,
-                    //    SaldoInicial = t.CuentaOrigen.SaldoInicial,
-                    //},
-                    //CuentaDestino = new CuentaDto
-                    //{
-                    //    Id = t.CuentaDestino.Id,
-                    //    Nombre = t.CuentaDestino.Nombre,
-                    //    SaldoInicial = t.CuentaDestino.SaldoInicial,
-                    //},
+                    FechaTransferencia = t.FechaTransferencia,
+                    CuentaOrigen = new CuentaDto
+                    {
+                        Id = t.CuentaOrigen.Id,
+                        Nombre = t.CuentaOrigen.Nombre,
+                        SaldoInicial = t.CuentaOrigen.SaldoInicial,
+                    },
+                    CuentaDestino = new CuentaDto
+                    {
+                        Id = t.CuentaDestino.Id,
+                        Nombre = t.CuentaDestino.Nombre,
+                        SaldoInicial = t.CuentaDestino.SaldoInicial,
+                    },
                     Tipo = t.Tipo,
                     Estado = t.Estado,
                 };

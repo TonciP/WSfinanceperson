@@ -51,6 +51,7 @@ namespace WSfinanceperson.Infrastructure.UseCases.Query.Transacciones
                 {
                     var transaccion = new TransaccionDto
                     {
+                        Id = t.Id,
                         Monto = t.Monto,
                         Descripcion = t.Descripcion,
                         Cuenta = new CuentaDto
