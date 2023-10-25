@@ -26,10 +26,13 @@ namespace WSfinanceperson.WebApi.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> EliminarTransferencia([FromBody] EliminarTransferenciaCommand command)
+        [HttpDelete("{Id:Guid}")]
+        public async Task<IActionResult> EliminarTransferencia(Guid Id)
         {
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(new EliminarTransferenciaCommand
+            {
+                Id = Id
+            });
             return Ok(result);
         }
 

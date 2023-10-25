@@ -10,10 +10,10 @@ namespace WSfinanceperson.Application.UseCases.Command.Transacciones.EliminarTra
     public class EliminarTransaccionCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
-        public EliminarTransaccionCommand(Guid id)
-        {
-            this.Id = id;
-        }
-        public EliminarTransaccionCommand() { }
+        //public EliminarTransaccionCommand(Guid id)
+        //{
+        //    this.Id = id;
+        //}
+        //public EliminarTransaccionCommand() { }
     }
 }

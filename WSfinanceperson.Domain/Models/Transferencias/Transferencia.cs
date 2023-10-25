@@ -27,26 +27,26 @@ namespace WSfinanceperson.Domain.Models.Transferencias
             Estado = EstadoTransaccion.Registrado;
         }
 
-        public Transferencia(DateTime fechaTransaferencia, Guid cuentaOrigen, Guid cuentaDestino, decimal monto)
-        {
-            Id = Guid.NewGuid();
-            FechaTransaferencia = fechaTransaferencia;
-            CuentaOrigenId = cuentaOrigen;
-            CuentaDestinoId = cuentaDestino;
-            Monto = monto;
-        }
+        //public Transferencia(DateTime fechaTransaferencia, Guid cuentaOrigen, Guid cuentaDestino, decimal monto)
+        //{
+        //    Id = Guid.NewGuid();
+        //    FechaTransaferencia = fechaTransaferencia;
+        //    CuentaOrigenId = cuentaOrigen;
+        //    CuentaDestinoId = cuentaDestino;
+        //    Monto = monto;
+        //}
 
-        public Transferencia(DateTime fechaTransaferencia, Guid cuentaOrigen, Guid cuentaDestino, decimal monto, Movimiento movimiento, EstadoTransaccion estadoTransaccion)
-        {
-            Id = Guid.NewGuid();
-            FechaTransaferencia = fechaTransaferencia;
-            CuentaOrigenId = cuentaOrigen;
-            CuentaDestinoId = cuentaDestino;
-            Monto = monto;
-            Tipo = movimiento;
-            Estado = estadoTransaccion;
-            AddDomainEvent(new TransferenciaCreada(cuentaOrigen, cuentaDestino, monto, DateTime.Now));
-        }
+        //public Transferencia(DateTime fechaTransaferencia, Guid cuentaOrigen, Guid cuentaDestino, decimal monto, Movimiento movimiento, EstadoTransaccion estadoTransaccion)
+        //{
+        //    Id = Guid.NewGuid();
+        //    FechaTransaferencia = fechaTransaferencia;
+        //    CuentaOrigenId = cuentaOrigen;
+        //    CuentaDestinoId = cuentaDestino;
+        //    Monto = monto;
+        //    Tipo = movimiento;
+        //    Estado = estadoTransaccion;
+        //    AddDomainEvent(new TransferenciaCreada(cuentaOrigen, cuentaDestino, monto, DateTime.Now));
+        //}
         public Transferencia(Guid cuentaOrigen, Guid cuentaDestino, decimal monto, Movimiento movimiento, EstadoTransaccion estadoTransaccion)
         {
             Id = Guid.NewGuid();
